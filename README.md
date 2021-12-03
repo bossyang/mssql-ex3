@@ -1,16 +1,17 @@
 # MSSQL EX3
 
 以 Flask Tutorial 範例改寫，原範例使用SQLite，改用MSSQL。
-練習 Store Procedure 呼叫。
+練習 Store Procedure 操作。
 
 
 ## Installation
 安裝 Python 3.9，並啟用虛擬環境。
 ```
+python -m pip install --upgrade pip
 python -m venv venv
 source venv/bin/activate
-python -m pip install --upgrade pip
 pip install -r requirements.txt
+source venv/bin/activate
 ```
 
 ## Database
@@ -19,13 +20,16 @@ pip install -r requirements.txt
 docker run --rm -e "ACCEPT_EULA=Y" \
   -e "SA_PASSWORD=yourpassword" \
   -e "MSSQL_COLLATION=Chinese_Taiwan_Stroke_CI_AS" \
-  -v ~/python_workspace/mssql-ex3/mssql/data:/var/opt/mssql/data \
-  -v ~/python_workspace/mssql-ex3/mssql/log:/var/opt/mssql/log \
+  -v ~/workspace/mssql-ex3/mssql/data:/var/opt/mssql/data \
+  -v ~/workspace/mssql-ex3/mssql/log:/var/opt/mssql/log \
   --name mssql2019 -p 1433:1433 \
-  -d mcr.microsoft.com/mssql/server:2019-CU13-ubuntu-20.04
+  -d mcr.microsoft.com/mssql/server:2019-CU14-ubuntu-20.04
 ```
+> 注意密碼要有一定複雜度，否則無法啟動。
+> volume mount point 請依照自己的環境調整
 
-1. 操作 SQL Server 容器的`sqlcmd`工具，建立資料庫 `Sales`
+1. 登入 SQL Server 容器，使用`sqlcmd`工具，建立資料庫 `Sales`。
+> 或使用個人偏好的GUI工具進行操作
 ```
 docker exec -it mssql2019 /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P
 yourpassword
@@ -59,5 +63,7 @@ flask init-db
 flask run
 ```
 
+瀏覽器輸入網址 http://localhost:5000
+
 ## Caveats
-資料庫初始化，需拆多個腳本，無法一次完成。
+資料庫初始化，需拆多次作業，無法一次完成。
