@@ -2,9 +2,7 @@
 
 {% block header %}
   <h1>{% block title %}Products{% endblock %}</h1>
-  {% if g.user %}
-    <a class="action" href="{{ url_for('product.create') }}">New</a>
-  {% endif %}
+  <a class="action" href="{{ url_for('product.create') }}">New</a>
 {% endblock %}
 
 {% block content %}

@@ -7,6 +7,9 @@ def create_app():
 
     app.config.from_object('config.Config')
 
+    from . import db
+    db.init_app(app)
+
     from . import product
     app.register_blueprint(product.bp)
     app.add_url_rule('/', endpoint='index')

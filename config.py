@@ -8,10 +8,10 @@ load_dotenv(path.join(basedir, '.env'))
 class Config:
     DEBUG = False
     TESTING = False
-    SECRET_KEY = ''
-    DB_HOST = "localhost"
+    SECRET_KEY = '9f83a6fc859ab7e532e2b27cfec2123c1a84689935151587d84294df63cc008d'
+    DB_HOST = environ.get('MSSQL_HOSTNAME')
     DB_NAME = environ.get('MSSQL_DATABASE')
-    DB_USERNAME = "sa"
+    DB_USERNAME = environ.get('MSSQL_USERNAME')
     DB_PASSWORD = environ.get('MSSQL_PASSWORD')
 
 
