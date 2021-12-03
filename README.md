@@ -19,6 +19,8 @@ pip install -r requirements.txt
 docker run --rm -e "ACCEPT_EULA=Y" \
   -e "SA_PASSWORD=yourpassword" \
   -e "MSSQL_COLLATION=Chinese_Taiwan_Stroke_CI_AS" \
+  -v ~/python_workspace/mssql-ex3/mssql/data:/var/opt/mssql/data \
+  -v ~/python_workspace/mssql-ex3/mssql/log:/var/opt/mssql/log \
   --name mssql2019 -p 1433:1433 \
   -d mcr.microsoft.com/mssql/server:2019-CU13-ubuntu-20.04
 ```
